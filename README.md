@@ -75,6 +75,8 @@ Run the development server:
 npm run dev
 ```
 
+**NOTE**: If you have trouble starting your environment, you may need to downgrade your node version using nvm, volta or similar (I could not run on node 19 but could on node 14, for example)
+
 Open [http://localhost:3333](http://localhost:3333) with your browser to see the result.
 
 You can start by looking at `modules/property-details/index`. The page auto-updates as you edit the file.

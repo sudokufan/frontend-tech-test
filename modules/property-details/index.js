@@ -72,6 +72,20 @@ const Detail = ({}) => {
           </AccountList>
         </RowContainer>
       </AccountSection>
+      <AccountSection>
+        <AccountLabel>Valuation change</AccountLabel>
+        <RowContainer>
+          <AccountList>
+            <AccountListItem><InfoText>Purchased for £92,000 in in July 2005</InfoText></AccountListItem>
+            <AccountListItem><InfoText>Since purchase</InfoText>
+            {/* bubble info */}
+            </AccountListItem>
+            <AccountListItem><InfoText>Annual appreciation</InfoText>
+            {/* bubble info */}
+            </AccountListItem>
+          </AccountList>
+        </RowContainer>
+      </AccountSection>
       {mortgage && (
         <AccountSection>
           <AccountLabel>Mortgage</AccountLabel>
