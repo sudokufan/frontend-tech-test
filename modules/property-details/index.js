@@ -36,9 +36,10 @@ const account = {
 const Detail = ({}) => {
   let mortgage;
   const lastUpdate = new Date(account.lastUpdate);
+  const originalPurchasePriceDate = new Date(account.originalPurchasePriceDate);
   if (account.associatedMortgages.length) {
     mortgage = account.associatedMortgages[0];
-  }
+  };
 
   return (
     <Inset>
@@ -76,7 +77,10 @@ const Detail = ({}) => {
         <AccountLabel>Valuation change</AccountLabel>
         <RowContainer>
           <AccountList>
-            <AccountListItem><InfoText>Purchased for £92,000 in in July 2005</InfoText></AccountListItem>
+            <AccountListItem><InfoText>Purchased for £{account.originalPurchasePrice} in {format(
+              originalPurchasePriceDate,
+              "MMM yyyy"
+            )}</InfoText></AccountListItem>
             <AccountListItem><InfoText>Since purchase</InfoText>
             {/* bubble info */}
             </AccountListItem>
