@@ -4,8 +4,9 @@ import React from "react";
 import { Button } from "../../components/button";
 import RowContainer from "../../components/row-container";
 import {
-  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoBubble, InfoText, InfoTextBold, Inset
+  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, InfoTextBold, Inset
 } from "./style";
+import { InfoBubble } from "../../components/info-bubble";
 
 
 const account = {
