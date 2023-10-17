@@ -33,6 +33,15 @@ const account = {
   updateAfterDays: 30,
 };
 
+const currencyFormatting = (value) => {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+  }).format(
+    Math.abs(value)
+  )
+}
+
 const Detail = ({}) => {
   let mortgage;
   const lastUpdate = new Date(account.lastUpdate);
@@ -81,27 +90,13 @@ const Detail = ({}) => {
         <AccountLabel>Valuation change</AccountLabel>
         <RowContainer>
           <AccountList>
-            <AccountListItem><InfoText>Purchased for <InfoTextBold>{new Intl.NumberFormat("en-GB", {
-                  style: "currency",
-                  currency: "GBP",
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 0,
-                }).format(
-                  Math.abs(account.originalPurchasePrice)
-                )}</InfoTextBold> in {format(
+            <AccountListItem><InfoText>Purchased for <InfoTextBold>{currencyFormatting(account.originalPurchasePrice)}</InfoTextBold> in {format(
               originalPurchasePriceDate,
               "MMMM yyyy"
             )}</InfoText></AccountListItem>
             <AccountListItem><InfoText>Since purchase</InfoText>
             <InfoBubble>
-            {`${new Intl.NumberFormat("en-GB", {
-                  style: "currency",
-                  currency: "GBP",
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 0,
-                }).format(
-                  Math.abs(priceChangeSincePurchase)
-                )} (${priceChangeSincePurchasePercentage}%)`}
+            {`${currencyFormatting(priceChangeSincePurchase)} (${priceChangeSincePurchasePercentage}%)`}
                 </InfoBubble>
             </AccountListItem>
             <AccountListItem><InfoText>Annual appreciation</InfoText>
@@ -119,12 +114,7 @@ const Detail = ({}) => {
           >
             <AccountList>
               <AccountListItem><InfoText>
-                {new Intl.NumberFormat("en-GB", {
-                  style: "currency",
-                  currency: "GBP",
-                }).format(
-                  Math.abs(account.associatedMortgages[0].currentBalance)
-                )}
+                {currencyFormatting(account.associatedMortgages[0].currentBalance)}
               </InfoText></AccountListItem>
               <AccountListItem><InfoText>{account.associatedMortgages[0].name}</InfoText></AccountListItem>
             </AccountList>
