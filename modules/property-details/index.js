@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "../../components/button";
 import RowContainer from "../../components/row-container";
 import {
-  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, Inset
+  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, InfoTextBold, Inset
 } from "./style";
 
 
@@ -77,7 +77,14 @@ const Detail = ({}) => {
         <AccountLabel>Valuation change</AccountLabel>
         <RowContainer>
           <AccountList>
-            <AccountListItem><InfoText>Purchased for £{account.originalPurchasePrice} in {format(
+            <AccountListItem><InfoText>Purchased for <InfoTextBold>{new Intl.NumberFormat("en-GB", {
+                  style: "currency",
+                  currency: "GBP",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(
+                  Math.abs(account.originalPurchasePrice)
+                )}</InfoTextBold> in {format(
               originalPurchasePriceDate,
               "MMM yyyy"
             )}</InfoText></AccountListItem>

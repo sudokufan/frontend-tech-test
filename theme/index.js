@@ -67,6 +67,14 @@ export const theme = {
       fontSize: "48px",
       lineHeight: 1.1,
     },
+    weight: {
+      regular: {
+        fontWeight: 400,
+      },
+      bold: {
+        fontWeight: 700,
+      }
+    }
   },
   space: {
     xs: "4px",
