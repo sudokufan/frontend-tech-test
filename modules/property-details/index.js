@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import { add, format } from "date-fns";
+import { add, format, differenceInYears } from "date-fns";
 import React from "react";
 import { Button } from "../../components/button";
 import RowContainer from "../../components/row-container";
@@ -37,6 +37,10 @@ const Detail = ({}) => {
   let mortgage;
   const lastUpdate = new Date(account.lastUpdate);
   const originalPurchasePriceDate = new Date(account.originalPurchasePriceDate);
+  const priceChangeSincePurchase = account.recentValuation.amount - account.originalPurchasePrice;
+  const priceChangeSincePurchasePercentage = priceChangeSincePurchase / account.originalPurchasePrice * 100;
+  const annualAppreciation = priceChangeSincePurchasePercentage / differenceInYears(new Date(), originalPurchasePriceDate);
+
   if (account.associatedMortgages.length) {
     mortgage = account.associatedMortgages[0];
   };
@@ -86,13 +90,20 @@ const Detail = ({}) => {
                   Math.abs(account.originalPurchasePrice)
                 )}</InfoTextBold> in {format(
               originalPurchasePriceDate,
-              "MMM yyyy"
+              "MMMM yyyy"
             )}</InfoText></AccountListItem>
             <AccountListItem><InfoText>Since purchase</InfoText>
-            {/* bubble info */}
+            {`${new Intl.NumberFormat("en-GB", {
+                  style: "currency",
+                  currency: "GBP",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(
+                  Math.abs(priceChangeSincePurchase)
+                )} (${priceChangeSincePurchasePercentage}%)`}
             </AccountListItem>
             <AccountListItem><InfoText>Annual appreciation</InfoText>
-            {/* bubble info */}
+            {annualAppreciation}%
             </AccountListItem>
           </AccountList>
         </RowContainer>
