@@ -11,5 +11,6 @@ export const InfoBubble = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
     width: 200px;
+    padding: ${(props) => props.theme.space.xs};
   }
 `;
