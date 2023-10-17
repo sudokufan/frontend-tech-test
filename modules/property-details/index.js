@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "../../components/button";
 import RowContainer from "../../components/row-container";
 import {
-  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, InfoTextBold, Inset
+  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoBubble, InfoText, InfoTextBold, Inset
 } from "./style";
 
 
@@ -93,6 +93,7 @@ const Detail = ({}) => {
               "MMMM yyyy"
             )}</InfoText></AccountListItem>
             <AccountListItem><InfoText>Since purchase</InfoText>
+            <InfoBubble>
             {`${new Intl.NumberFormat("en-GB", {
                   style: "currency",
                   currency: "GBP",
@@ -101,9 +102,10 @@ const Detail = ({}) => {
                 }).format(
                   Math.abs(priceChangeSincePurchase)
                 )} (${priceChangeSincePurchasePercentage}%)`}
+                </InfoBubble>
             </AccountListItem>
             <AccountListItem><InfoText>Annual appreciation</InfoText>
-            {annualAppreciation}%
+            <InfoBubble>{annualAppreciation}%</InfoBubble>
             </AccountListItem>
           </AccountList>
         </RowContainer>
