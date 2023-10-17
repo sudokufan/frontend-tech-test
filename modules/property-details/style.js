@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const AccountList = styled.ul`
   list-style: none;
   padding-left: 0;
+  width: 100%;
 `;
 
 export const AccountLabel = styled.div`
@@ -26,6 +27,10 @@ export const InfoText = styled.div`
   color: ${(props) => props.theme.colors.neutral[600]};
 `;
 
+export const InfoTextBold = styled.span`
+  font-weight: ${(props) => props.theme.typography.weight.bold};
+`;
+
 export const AccountSection = styled.div`
   padding: ${(props) => props.theme.space.m} 0;
 
@@ -37,6 +42,8 @@ export const AccountSection = styled.div`
 
 export const AccountListItem = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &:not(:last-of-type) {
     margin-bottom: ${(props) => props.theme.space.m};

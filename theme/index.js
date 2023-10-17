@@ -29,6 +29,10 @@ export const theme = {
     white: {
       default: "#fff",
     },
+    green: {
+      light: "#c2f7e1",
+      dark: "#006b57",
+    }
   },
   typography: {
     xs: {
@@ -67,6 +71,10 @@ export const theme = {
       fontSize: "48px",
       lineHeight: 1.1,
     },
+    weight: {
+      regular: 400,
+      bold: 700,
+    }
   },
   space: {
     xs: "4px",

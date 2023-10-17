@@ -1,11 +1,12 @@
 /* eslint-disable max-statements */
-import { add, format } from "date-fns";
+import { add, format, differenceInYears } from "date-fns";
 import React from "react";
 import { Button } from "../../components/button";
 import RowContainer from "../../components/row-container";
 import {
-  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, Inset
+  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, InfoTextBold, Inset
 } from "./style";
+import { InfoBubble } from "../../components/info-bubble";
 
 
 const account = {
@@ -33,12 +34,26 @@ const account = {
   updateAfterDays: 30,
 };
 
+const currencyFormatting = (value) => {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+  }).format(
+    Math.abs(value)
+  )
+}
+
 const Detail = ({}) => {
   let mortgage;
   const lastUpdate = new Date(account.lastUpdate);
+  const originalPurchasePriceDate = new Date(account.originalPurchasePriceDate);
+  const priceChangeSincePurchase = account.recentValuation.amount - account.originalPurchasePrice;
+  const priceChangeSincePurchasePercentage = priceChangeSincePurchase / account.originalPurchasePrice * 100;
+  const annualAppreciation = priceChangeSincePurchasePercentage / differenceInYears(new Date(), originalPurchasePriceDate);
+
   if (account.associatedMortgages.length) {
     mortgage = account.associatedMortgages[0];
-  }
+  };
 
   return (
     <Inset>
@@ -72,6 +87,25 @@ const Detail = ({}) => {
           </AccountList>
         </RowContainer>
       </AccountSection>
+      <AccountSection>
+        <AccountLabel>Valuation change</AccountLabel>
+        <RowContainer>
+          <AccountList>
+            <AccountListItem><InfoText>Purchased for <InfoTextBold>{currencyFormatting(account.originalPurchasePrice)}</InfoTextBold> in {format(
+              originalPurchasePriceDate,
+              "MMMM yyyy"
+            )}</InfoText></AccountListItem>
+            <AccountListItem><InfoText>Since purchase</InfoText>
+            <InfoBubble>
+            {`${currencyFormatting(priceChangeSincePurchase)} (${priceChangeSincePurchasePercentage}%)`}
+                </InfoBubble>
+            </AccountListItem>
+            <AccountListItem><InfoText>Annual appreciation</InfoText>
+            <InfoBubble>{annualAppreciation}%</InfoBubble>
+            </AccountListItem>
+          </AccountList>
+        </RowContainer>
+      </AccountSection>
       {mortgage && (
         <AccountSection>
           <AccountLabel>Mortgage</AccountLabel>
@@ -81,12 +115,7 @@ const Detail = ({}) => {
           >
             <AccountList>
               <AccountListItem><InfoText>
-                {new Intl.NumberFormat("en-GB", {
-                  style: "currency",
-                  currency: "GBP",
-                }).format(
-                  Math.abs(account.associatedMortgages[0].currentBalance)
-                )}
+                {currencyFormatting(account.associatedMortgages[0].currentBalance)}
               </InfoText></AccountListItem>
               <AccountListItem><InfoText>{account.associatedMortgages[0].name}</InfoText></AccountListItem>
             </AccountList>
